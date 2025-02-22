@@ -13,7 +13,6 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import {Toaster} from "@/components/ui/sonner";
 
 const Auth = () => {
     const router = useRouter()
@@ -39,7 +38,6 @@ const Auth = () => {
     }
 
     const [toastId, setToastId] = useState(0)
-    const theme = useAppSelector(state => state.themeSlice.theme);
     const dispatch = useAppDispatch()
     const accepted = useAppSelector(state => state.cookieSlice.accepted);
 
@@ -163,9 +161,6 @@ const Auth = () => {
             router.push('/');
         }
     }, [accepted]);
-    useEffect(() => {
-        console.log(theme);
-    }, [theme]);
     return (
         <main
             className={`min-h-[100vh] flex flex-col items-center justify-center px-[25px] bg-neutral-900`}>
