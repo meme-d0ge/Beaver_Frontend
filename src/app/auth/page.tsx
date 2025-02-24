@@ -26,7 +26,6 @@ const Auth = () => {
             username: loginData.username,
             password: loginData.password,
         } as LoginData)
-        console.log(resultLogin);
     };
     const {register: registerRegister, handleSubmit: handleSubmitRegister} = useForm<RegisterData>();
     const onSubmitRegister: SubmitHandler<RegisterData> = async (registerData) => {

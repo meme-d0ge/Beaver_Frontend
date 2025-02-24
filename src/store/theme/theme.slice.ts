@@ -1,6 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-enum Theme{
+
+const checkTheme = () => {
+    const theme = localStorage.getItem("theme");
+    if (theme) {
+        if (theme === "dark") {
+            return Theme.dark
+        } else if (theme === "light") {
+            return Theme.light
+        }
+    }
+};
+export enum Theme{
     dark = "dark",
     light = "light",
 }
@@ -8,17 +19,23 @@ interface themeState {
     theme: Theme;
 }
 const initialState: themeState = {
-    theme: Theme.dark,
+    theme: checkTheme() || Theme.dark,
 };
 const themeSlice = createSlice({
     name: 'theme',
     initialState: initialState,
     reducers:{
-        changeTheme(state, action: { payload: Theme;}) {
-            state.theme = action.payload;
+        toggleTheme(state) {
+            if (state.theme === Theme.dark) {
+                state.theme = Theme.light;
+                localStorage.setItem("theme", Theme.light);
+            } else {
+                state.theme = Theme.dark;
+                localStorage.setItem("theme", Theme.dark);
+            }
         }
     }
 })
 
-export const { changeTheme } = themeSlice.actions
+export const { toggleTheme } = themeSlice.actions
 export default themeSlice.reducer
